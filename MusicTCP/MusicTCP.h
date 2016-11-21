@@ -30,3 +30,23 @@ public:
 };
 
 extern CMusicTCPApp theApp;
+
+
+class WorkerThread
+{
+public:
+	WorkerThread();
+	CWinThread *pThread;
+
+	// Overrides
+public:
+	void playMusic();
+
+	virtual BOOL InitInstance();
+
+	// Implementation
+
+	DECLARE_MESSAGE_MAP()
+};
+
+extern WorkerThread workerThread;

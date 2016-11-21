@@ -37,6 +37,8 @@ CMusicTCPApp::CMusicTCPApp()
 CMusicTCPApp theApp;
 
 
+
+
 // CMusicTCPApp initialization
 
 BOOL CMusicTCPApp::InitInstance()
