@@ -7,6 +7,8 @@
 #include "MusicTCPDlg.h"
 #include "afxdialogex.h"
 #include <iostream>
+#include <fstream>
+#include <streambuf>
 #include "CFugueLib.h"
 
 #ifdef _DEBUG
@@ -162,7 +164,34 @@ HCURSOR CMusicTCPDlg::OnQueryDragIcon()
 
 void CMusicTCPDlg::OnBnClickedBtloadtxt()
 {
-	// TODO: Add your control notification handler code here
+	// szFilters is a text string that includes two file name filters:
+	// "*.my" for "MyType Files" and "*.*' for "All Files."
+	TCHAR szFilters[] = _T("Text files (*.txt)|*.txt|All Files (*.*)|*.*||");
+
+	// Create an Open dialog; the default file name extension is ".my".
+	CFileDialog fileDlg(TRUE, _T("txt"), _T("*.txt"),
+		OFN_FILEMUSTEXIST | OFN_HIDEREADONLY, szFilters);
+
+	// Display the file dialog. When user clicks OK, fileDlg.DoModal() 
+	// returns IDOK.
+	if (fileDlg.DoModal() == IDOK)
+	{
+		CString pathName = fileDlg.GetPathName();
+
+		std::ifstream inputfile;
+		inputfile.open(pathName);
+		std::stringstream buffer;
+		buffer << inputfile.rdbuf();
+
+		UpdateData();
+		textInBox = buffer.str().c_str();
+		UpdateData(FALSE);
+
+		//Change the window's title to the opened file's title.
+		CString fileName = fileDlg.GetFileTitle();
+
+		//SetWindowText(fileName);
+	}
 }
 
 
