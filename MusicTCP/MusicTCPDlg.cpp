@@ -167,5 +167,12 @@ void CMusicTCPDlg::OnBnClickedOk()
 
 void CMusicTCPDlg::OnBnClickedButton1()
 {
-	AfxBeginThread(CMusicTCPApp::playMusic(), this);
+	if (CFugue::GetMidiOutPortCount() <= 0)
+	{
+		std::cerr << "No MIDI Output Ports found!";
+		exit(-1);
+	}
+
+	std::cout << "Playing Notes..";
+	CFugue::PlayMusicStringWithOpts(_T("C D E F G A B"), MIDI_MAPPER, 20);
 }

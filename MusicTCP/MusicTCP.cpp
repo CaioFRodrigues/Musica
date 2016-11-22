@@ -54,7 +54,7 @@ BOOL CMusicTCPApp::InitInstance()
 	InitCommonControlsEx(&InitCtrls);
 
 	CWinApp::InitInstance();
-
+	AfxInitRichEdit2();
 
 	AfxEnableControlContainer();
 
