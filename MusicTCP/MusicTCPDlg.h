@@ -32,6 +32,8 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnBnClickedOk();
-	afx_msg void OnBnClickedButton1();
+	CString textInBox;
+	afx_msg void OnBnClickedBtloadtxt();
+	afx_msg void OnBnClickedBtplaymusic();
+	afx_msg void OnBnClickedBtsavemusic();
 };

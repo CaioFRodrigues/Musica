@@ -53,6 +53,7 @@ END_MESSAGE_MAP()
 
 CMusicTCPDlg::CMusicTCPDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_MUSICTCP_DIALOG, pParent)
+	, textInBox(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -60,14 +61,16 @@ CMusicTCPDlg::CMusicTCPDlg(CWnd* pParent /*=NULL*/)
 void CMusicTCPDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Text(pDX, textBox, textInBox);
 }
 
 BEGIN_MESSAGE_MAP(CMusicTCPDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDOK, &CMusicTCPDlg::OnBnClickedOk)
-	ON_BN_CLICKED(IDC_BUTTON1, &CMusicTCPDlg::OnBnClickedButton1)
+	ON_BN_CLICKED(BtLoadTxt, &CMusicTCPDlg::OnBnClickedBtloadtxt)
+	ON_BN_CLICKED(BtPlayMusic, &CMusicTCPDlg::OnBnClickedBtplaymusic)
+	ON_BN_CLICKED(BtSaveMusic, &CMusicTCPDlg::OnBnClickedBtsavemusic)
 END_MESSAGE_MAP()
 
 
@@ -157,15 +160,13 @@ HCURSOR CMusicTCPDlg::OnQueryDragIcon()
 }
 
 
-
-void CMusicTCPDlg::OnBnClickedOk()
+void CMusicTCPDlg::OnBnClickedBtloadtxt()
 {
 	// TODO: Add your control notification handler code here
-	CDialogEx::OnOK();
 }
 
 
-void CMusicTCPDlg::OnBnClickedButton1()
+void CMusicTCPDlg::OnBnClickedBtplaymusic()
 {
 	if (CFugue::GetMidiOutPortCount() <= 0)
 	{
@@ -175,4 +176,12 @@ void CMusicTCPDlg::OnBnClickedButton1()
 
 	std::cout << "Playing Notes..";
 	CFugue::PlayMusicStringWithOpts(_T("C D E F G A B"), MIDI_MAPPER, 20);
+}
+
+
+void CMusicTCPDlg::OnBnClickedBtsavemusic()
+{
+	UpdateData();
+	textInBox = "THIS IS TEXT";
+	UpdateData(FALSE);
 }
