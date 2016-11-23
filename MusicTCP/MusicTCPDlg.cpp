@@ -217,7 +217,7 @@ void CMusicTCPDlg::OnBnClickedBtplaymusic()
 	std::cout << "Playing Notes..";
 	//Plays the characters read from text as musical notes
 	//music.playMusic(_T("A[5] A[6] A[5]i A[6]i"));	//_T converts char to TCHAR, type used in the CFugue library
-	music.convertCharacter("A !?A");
+	music.convertCharacter("A ?A");
 }
 
 
