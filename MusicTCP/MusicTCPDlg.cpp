@@ -77,6 +77,7 @@ BEGIN_MESSAGE_MAP(CMusicTCPDlg, CDialogEx)
 	ON_BN_CLICKED(BtPlayMusic, &CMusicTCPDlg::OnBnClickedBtplaymusic)
 	ON_BN_CLICKED(BtSaveMusic, &CMusicTCPDlg::OnBnClickedBtsavemusic)
 	ON_BN_CLICKED(BtSaveText, &CMusicTCPDlg::OnBnClickedBtsavetext)
+	ON_BN_CLICKED(BtCleanText, &CMusicTCPDlg::OnBnClickedBtcleantext)
 END_MESSAGE_MAP()
 
 
@@ -259,4 +260,13 @@ void CMusicTCPDlg::OnBnClickedBtsavetext()
 
 
 	}
+}
+
+
+void CMusicTCPDlg::OnBnClickedBtcleantext()
+{
+	// TODO: Add your control notification handler code here
+	UpdateData();
+	textInBox = "";
+	UpdateData(FALSE);
 }

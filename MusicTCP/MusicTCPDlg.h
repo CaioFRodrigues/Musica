@@ -38,4 +38,5 @@ public:
 	afx_msg void OnBnClickedBtplaymusic();
 	afx_msg void OnBnClickedBtsavemusic();
 	afx_msg void OnBnClickedBtsavetext();
+	afx_msg void OnBnClickedBtcleantext();
 };
