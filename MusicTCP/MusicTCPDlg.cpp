@@ -9,6 +9,8 @@
 #include <iostream>
 #include <fstream>
 #include <streambuf>
+#include<string.h>
+#include<string>
 #include "CFugueLib.h"
 
 #ifdef _DEBUG
@@ -178,13 +180,17 @@ void CMusicTCPDlg::OnBnClickedBtloadtxt()
 	{
 		CString pathName = fileDlg.GetPathName();
 
-		std::ifstream inputfile;
-		inputfile.open(pathName);
-		std::stringstream buffer;
-		buffer << inputfile.rdbuf();
+		std::string line, finalLine;
+		std::ifstream inputFile;
+		inputFile.open(pathName);
+
+		while (getline(inputFile, line))    //read input file until the end
+		{
+			finalLine += line + "\r\n";
+		}
 
 		UpdateData();
-		textInBox = buffer.str().c_str();
+		textInBox = finalLine.c_str();
 		UpdateData(FALSE);
 
 		//Change the window's title to the opened file's title.
@@ -211,6 +217,6 @@ void CMusicTCPDlg::OnBnClickedBtplaymusic()
 void CMusicTCPDlg::OnBnClickedBtsavemusic()
 {
 	UpdateData();
-	textInBox = "THIS IS TEXT";
+	textInBox = "THIS IS TEXT \r\n aaaaa";
 	UpdateData(FALSE);
 }
