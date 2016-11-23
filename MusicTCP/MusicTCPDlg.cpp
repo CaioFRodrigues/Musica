@@ -76,6 +76,7 @@ BEGIN_MESSAGE_MAP(CMusicTCPDlg, CDialogEx)
 	ON_BN_CLICKED(BtLoadTxt, &CMusicTCPDlg::OnBnClickedBtloadtxt)
 	ON_BN_CLICKED(BtPlayMusic, &CMusicTCPDlg::OnBnClickedBtplaymusic)
 	ON_BN_CLICKED(BtSaveMusic, &CMusicTCPDlg::OnBnClickedBtsavemusic)
+	ON_BN_CLICKED(BtSaveText, &CMusicTCPDlg::OnBnClickedBtsavetext)
 END_MESSAGE_MAP()
 
 
@@ -224,4 +225,37 @@ void CMusicTCPDlg::OnBnClickedBtsavemusic()
 	UpdateData();
 	textInBox = "THIS IS TEXT \r\n aaaaa";
 	UpdateData(FALSE);
+}
+
+
+void CMusicTCPDlg::OnBnClickedBtsavetext()
+{
+	// TODO: Add your control notification handler code here
+	// szFilters is a text string that includes two file name filters:
+	// "*.my" for "MyType Files" and "*.*' for "All Files."
+	TCHAR szFilters[] = _T("Text files (*.txt)|*.txt|All Files (*.*)|*.*||");
+
+	// Create an Open dialog; the default file name extension is ".my".
+	CFileDialog fileDlg(FALSE, _T(""), _T(""),
+		OFN_OVERWRITEPROMPT | OFN_HIDEREADONLY, szFilters);
+
+	// Display the file dialog. When user clicks OK, fileDlg.DoModal() 
+	// returns IDOK.
+	if (fileDlg.DoModal() == IDOK)
+	{
+		CString pathName = fileDlg.GetPathName();
+
+		std::ofstream outputFile;
+		outputFile.open(pathName);
+		CT2CA pszConvertedAnsiString(textInBox.GetString());
+		std::string outputText(pszConvertedAnsiString);
+		outputFile << outputText;
+		
+		UpdateData();
+		UpdateData(FALSE);
+
+
+
+
+	}
 }
