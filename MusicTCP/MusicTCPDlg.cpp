@@ -12,6 +12,7 @@
 #include<string.h>
 #include<string>
 #include "CFugueLib.h"
+#include "Music.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -203,6 +204,8 @@ void CMusicTCPDlg::OnBnClickedBtloadtxt()
 
 void CMusicTCPDlg::OnBnClickedBtplaymusic()
 {
+	Music music;
+
 	if (CFugue::GetMidiOutPortCount() <= 0)
 	{
 		std::cerr << "No MIDI Output Ports found!";
@@ -210,7 +213,9 @@ void CMusicTCPDlg::OnBnClickedBtplaymusic()
 	}
 
 	std::cout << "Playing Notes..";
-	CFugue::PlayMusicStringWithOpts(_T("C D E F G A B"), MIDI_MAPPER, 20);
+	//Plays the characters read from text as musical notes
+	//music.playMusic(_T("A[5] A[6] A[5]i A[6]i"));	//_T converts char to TCHAR, type used in the CFugue library
+	music.convertCharacter("A !?A");
 }
 
 
