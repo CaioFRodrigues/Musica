@@ -223,9 +223,25 @@ void CMusicTCPDlg::OnBnClickedBtplaymusic()
 
 void CMusicTCPDlg::OnBnClickedBtsavemusic()
 {
-	UpdateData();
-	textInBox = "THIS IS TEXT \r\n aaaaa";
-	UpdateData(FALSE);
+	Music music;
+	
+
+	TCHAR szFilters[] = _T("Midi files (*.midi)|*.midi|All Files (*.*)|*.*||");
+
+	// Create an Open dialog; the default file name extension is ".my".
+	CFileDialog fileDlg(FALSE, _T(""), _T(""),
+		OFN_OVERWRITEPROMPT | OFN_HIDEREADONLY, szFilters);
+
+	// Display the file dialog. When user clicks OK, fileDlg.DoModal() 
+	// returns IDOK.
+	if (fileDlg.DoModal() == IDOK)
+	{
+		//TODO trocar a música
+		CString pathName = fileDlg.GetPathName();
+		music.saveMusic(_T("A A A B C D"), pathName);
+	}
+		
+
 }
 
 

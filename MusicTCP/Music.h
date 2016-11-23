@@ -10,7 +10,7 @@ public:
 	~Music();
 
 	void convertCharacter(std::string text);
-	void saveMusic(char* text);
+	void saveMusic(const CString character, const CString pathName);
 	void playMusic(const TCHAR* character);
 
 private:

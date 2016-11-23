@@ -87,8 +87,14 @@ void Music::convertCharacter(std::string text)
 	delete[]musicTCharArray;
 }
 
-void Music::saveMusic(char * text)
+void Music::saveMusic(const CString character, const CString pathName)
 {
+	CFugue::Player player;
+
+	//CT2A Macro
+	CT2A ascii(pathName);
+
+	player.SaveAsMidiFile(CFugue::MString(character), ascii.m_psz);
 }
 
 void Music::playMusic(const TCHAR * character)
