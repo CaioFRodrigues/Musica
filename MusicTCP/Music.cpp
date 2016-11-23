@@ -25,22 +25,53 @@ void Music::convertCharacter(std::string text)
 
 	for (i = 0; i < text.size(); i++) {
 
-		if (text[i] == '!') {
+		switch (text[i]) {
+			//If it's instruments
+			//TODO: Ensure that the sum when tested character is digit won't overflow (127 threshold)
+			//		Figure out a better way to append this part to the music string
+		case '!':
 			instrument = 6; //Harpischord
-			musicString.append(" I[").append(std::to_string(octave)).append("] ");
-		}
-			
-		if (text[i] == '?') {
+			break;
+		case '\n':
+			instrument = 14; //Tubular bells
+			break;
+		case ';':
+			instrument = 75; //Pan flute
+			break;
+		case ',':
+			instrument = 19; //Church organ
+			break;
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+		case '0':
+			instrument = instrument + text[i];
+			break;
+		//If it's octave changes	
+		case '?':
+		case '.':
 			octave++;
+			break;
+		//If it's note
+		case 'A':
+		case 'B':
+		case 'C':
+		case 'D':
+		case 'E':
+		case 'F':
+		case 'G':
+			//musicString.append(note).append("[").append(std::to_string(octave)).append("]");
+			break;
+		//Special cases
+		default:
+			break;
 		}
-
-		if (text[i] == 'A') {
-			note = "A";
-			musicString.append(note).append("[").append(std::to_string(octave)).append("]");
-		}
-
-
-			
 	}
 
 	//Crazy conversion from std::string to const TCHAR* format that CFugue will understand
@@ -50,7 +81,8 @@ void Music::convertCharacter(std::string text)
 	wchar_t *musicTCharArray = new wchar_t[size];
 	size_t newSize;
 	mbstowcs_s(&newSize, musicTCharArray, size, musicCharArray, size - 1);
-	playMusic(musicTCharArray);
+	//playMusic(musicTCharArray);
+	playMusic(_T("C R D"));
 
 	delete[]musicTCharArray;
 }
