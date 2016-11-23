@@ -243,6 +243,7 @@ void CMusicTCPDlg::OnBnClickedBtsavetext()
 	// returns IDOK.
 	if (fileDlg.DoModal() == IDOK)
 	{
+		UpdateData();
 		CString pathName = fileDlg.GetPathName();
 
 		std::ofstream outputFile;
@@ -251,7 +252,7 @@ void CMusicTCPDlg::OnBnClickedBtsavetext()
 		std::string outputText(pszConvertedAnsiString);
 		outputFile << outputText;
 		
-		UpdateData();
+		
 		UpdateData(FALSE);
 
 
