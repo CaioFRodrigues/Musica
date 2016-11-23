@@ -18,4 +18,3 @@ private:
 	std::string instrument;
 	int currentOctave;
 };
-

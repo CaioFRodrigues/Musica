@@ -24,6 +24,7 @@ void Music::convertCharacter(std::string text)
 	int instrument = 0;	//Default instrument (piano)
 	char previousChar;
 	bool previousCharWasNote = false;
+	bool instrumentChanged = false;
 
 	for (i = 0; i < text.size(); i++) {
 
@@ -34,18 +35,22 @@ void Music::convertCharacter(std::string text)
 		case '!':
 			instrument = 6; //Harpischord
 			previousCharWasNote = false;
+			instrumentChanged = true;
 			break;
 		case '\n':
 			instrument = 14; //Tubular bells
 			previousCharWasNote = false;
+			instrumentChanged = true;
 			break;
 		case ';':
 			instrument = 75; //Pan flute
 			previousCharWasNote = false;
+			instrumentChanged = true;
 			break;
 		case ',':
 			instrument = 19; //Church organ
 			previousCharWasNote = false;
+			instrumentChanged = true;
 			break;
 		case '1':
 		case '2':
@@ -59,6 +64,7 @@ void Music::convertCharacter(std::string text)
 		case '0':
 			instrument = instrument + text[i];
 			previousCharWasNote = false;
+			instrumentChanged = true;
 			break;
 		//If it's octave changes	
 		case '?':
@@ -88,6 +94,11 @@ void Music::convertCharacter(std::string text)
 			}
 			previousCharWasNote = false;
 			break;
+		}
+
+		if (instrumentChanged) {
+			musicString = musicString + "I[" + std::to_string(instrument) + "] ";
+			instrumentChanged = false;
 		}
 
 	}
