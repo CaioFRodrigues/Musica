@@ -9,7 +9,7 @@ public:
 	Music();
 	~Music();
 
-	void convertCharacter();
+	void convertCharacter(std::string text);
 	void saveMusic(char* text);
 	void playMusic(const TCHAR* character);
 
