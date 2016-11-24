@@ -13,6 +13,7 @@
 #include<string>
 #include "CFugueLib.h"
 #include "Music.h"
+#include "atlstr.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -67,6 +68,7 @@ void CMusicTCPDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Text(pDX, textBox, textInBox);
+	DDX_Control(pDX, textBox, textBoxControl);
 }
 
 BEGIN_MESSAGE_MAP(CMusicTCPDlg, CDialogEx)
@@ -217,6 +219,17 @@ void CMusicTCPDlg::OnBnClickedBtplaymusic()
 	//std::cout << "Playing Notes..";
 	//Plays the characters read from text as musical notes
 	//music.playMusic(_T("A[5] A[6] A[5]i A[6]i"));	//_T converts char to TCHAR, type used in the CFugue library
+	UpdateData();
+	CString textInBoxCeeString;
+	textBoxControl.GetWindowTextW(textInBoxCeeString);
+	
+	CT2CA pszConvertedAnsiString(textInBox.GetString());
+	std::string textInBoxString(pszConvertedAnsiString);
+	if (multiLineTextInBox.compare(textInBoxString)){
+		multiLineTextInBox = textInBoxString;
+	}
+
+	UpdateData(FALSE);
 
 	if(!multiLineTextInBox.empty())
 		music.playMusic(music.convertCharacter(multiLineTextInBox));
