@@ -30,7 +30,6 @@ void Music::convertCharacter(std::string text)
 
 		switch (text[i]) {
 			//If it's instruments
-			//TODO: Ensure that the sum when tested character is digit won't overflow (127 threshold)
 			//		Figure out a better way to append this part to the music string
 		case '!':
 			instrument = 6; //Harpischord
@@ -63,6 +62,8 @@ void Music::convertCharacter(std::string text)
 		case '9':
 		case '0':
 			instrument = instrument + text[i];
+			if (instrument > 127)
+				instrument -= 127;
 			previousCharWasNote = false;
 			instrumentChanged = true;
 			break;
@@ -70,6 +71,8 @@ void Music::convertCharacter(std::string text)
 		case '?':
 		case '.':
 			octave++;
+			if (octave > 10)
+				octave = 5;
 			previousCharWasNote = false;
 			break;
 		//If it's note
