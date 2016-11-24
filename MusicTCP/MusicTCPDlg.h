@@ -4,6 +4,7 @@
 
 #pragma once
 #include "afxwin.h"
+#include <string>
 
 
 // CMusicTCPDlg dialog
@@ -34,6 +35,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CString textInBox;
+	std::string multiLineTextInBox;
 	afx_msg void OnBnClickedBtloadtxt();
 	afx_msg void OnBnClickedBtplaymusic();
 	afx_msg void OnBnClickedBtsavemusic();

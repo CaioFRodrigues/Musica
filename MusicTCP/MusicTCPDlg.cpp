@@ -183,17 +183,17 @@ void CMusicTCPDlg::OnBnClickedBtloadtxt()
 	{
 		CString pathName = fileDlg.GetPathName();
 
-		std::string line, finalLine;
+		std::string line;
 		std::ifstream inputFile;
 		inputFile.open(pathName);
 
 		while (getline(inputFile, line))    //read input file until the end
 		{
-			finalLine += line + "\r\n";
+			multiLineTextInBox += line + "\r\n";
 		}
 
 		UpdateData();
-		textInBox = finalLine.c_str();
+		textInBox = multiLineTextInBox.c_str();
 		UpdateData(FALSE);
 
 		//Change the window's title to the opened file's title.
@@ -214,10 +214,12 @@ void CMusicTCPDlg::OnBnClickedBtplaymusic()
 		exit(-1);
 	}
 
-	std::cout << "Playing Notes..";
+	//std::cout << "Playing Notes..";
 	//Plays the characters read from text as musical notes
 	//music.playMusic(_T("A[5] A[6] A[5]i A[6]i"));	//_T converts char to TCHAR, type used in the CFugue library
-	music.convertCharacter("A ?!A ..B");
+
+	if(!multiLineTextInBox.empty())
+		music.playMusic(music.convertCharacter(multiLineTextInBox));
 }
 
 
@@ -238,7 +240,7 @@ void CMusicTCPDlg::OnBnClickedBtsavemusic()
 	{
 		//TODO trocar a música
 		CString pathName = fileDlg.GetPathName();
-		music.saveMusic(_T("A A A B C D"), pathName);
+		music.saveMusic(multiLineTextInBox, pathName);
 	}
 		
 

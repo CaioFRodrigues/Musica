@@ -15,7 +15,7 @@ Music::~Music()
 
 
 
-void Music::convertCharacter(std::string text)
+std::string Music::convertCharacter(std::string text)
 {
 	size_t i = 0;
 	std::string musicString;
@@ -106,30 +106,36 @@ void Music::convertCharacter(std::string text)
 
 	}
 
-	//Crazy conversion from std::string to const TCHAR* format that CFugue will understand
-	// TODO: Turn this into its own conversion function (end result must be musicTCharArray)
-	const char* musicCharArray = musicString.c_str();
-	size_t size = strlen(musicCharArray) + 1;
-	wchar_t *musicTCharArray = new wchar_t[size];
-	size_t newSize;
-	mbstowcs_s(&newSize, musicTCharArray, size, musicCharArray, size - 1);
-	playMusic(musicTCharArray);
-	//playMusic(_T("C R D"));
-
-	delete[]musicTCharArray;
+	return musicString;
 }
 
-void Music::saveMusic(const CString character, const CString pathName)
+void Music::saveMusic(std::string character, const CString pathName)
 {
 	CFugue::Player player;
 
 	//CT2A Macro
 	CT2A ascii(pathName);
 
-	player.SaveAsMidiFile(CFugue::MString(character), ascii.m_psz);
+	//char * cString = new char[character.length() + 1];
+	//std::strcpy(cString, character.c_str());
+
+	player.SaveAsMidiFile(CFugue::MString(character.c_str()), ascii.m_psz);
 }
 
-void Music::playMusic(const TCHAR * character)
+void Music::playMusic(std::string character)
 {
-	CFugue::PlayMusicStringWithOpts(character, MIDI_MAPPER, 20);
+
+	//Crazy conversion from std::string to const TCHAR* format that CFugue will understand
+	// TODO: Turn this into its own conversion function (end result must be musicTCharArray)
+	const char* musicCharArray = character.c_str();
+	size_t size = strlen(musicCharArray) + 1;
+	wchar_t *musicTCharArray = new wchar_t[size];
+	size_t newSize;
+	mbstowcs_s(&newSize, musicTCharArray, size, musicCharArray, size - 1);
+
+	CFugue::PlayMusicStringWithOpts(musicTCharArray, MIDI_MAPPER, 20);
+	//playMusic(_T("C R D"));
+
+	delete[]musicTCharArray;
+
 }

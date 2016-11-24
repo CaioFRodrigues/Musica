@@ -9,9 +9,9 @@ public:
 	Music();
 	~Music();
 
-	void convertCharacter(std::string text);
-	void saveMusic(const CString character, const CString pathName);
-	void playMusic(const TCHAR* character);
+	std::string convertCharacter(std::string text);
+	void Music::saveMusic(std::string character, const CString pathName);
+	void playMusic(std::string character);
 
 private:
 	int bpm;
