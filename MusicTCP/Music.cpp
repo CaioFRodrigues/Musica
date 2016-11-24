@@ -21,11 +21,14 @@ std::string Music::convertCharacter(std::string text)
 	std::string musicString;
 
 	int octave = 5;	//Default octave
+	int volume = 70; //Default volume
 	int instrument = 0;	//Default instrument (piano)
 	char previousChar;
 	bool previousCharWasNote = false;
 	bool instrumentChanged = false;
+	bool volumeChanged = false;
 
+	musicString += "X[VOLUME_COARSE]=" + std::to_string(volume) + " ";
 	for (i = 0; i < text.size(); i++) {
 
 		switch (text[i]) {
@@ -75,6 +78,21 @@ std::string Music::convertCharacter(std::string text)
 				octave = 5;
 			previousCharWasNote = false;
 			break;
+		//If it's volume changes	
+		case 'I':
+		case 'i':
+		case 'U':
+		case 'u':
+			volume+=volume*0.1;
+			previousCharWasNote = false;
+			volumeChanged = true;
+			break;
+		//Special case spacebar
+		case ' ':
+			volume = volume*2;
+			previousCharWasNote = false;
+			volumeChanged = true;
+			break;
 		//If it's note
 		case 'A':
 		case 'B':
@@ -103,7 +121,12 @@ std::string Music::convertCharacter(std::string text)
 			musicString = musicString + "I[" + std::to_string(instrument) + "] ";
 			instrumentChanged = false;
 		}
-
+		if (volumeChanged) {
+			if (volume > 120)
+				volume = 120;
+			musicString += "X[VOLUME_COARSE]=" + std::to_string(volume) + " ";
+			volumeChanged = false;
+		}
 	}
 
 	return musicString;

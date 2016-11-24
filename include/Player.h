@@ -72,6 +72,7 @@ namespace CFugue
         ///
         /// After Play starts, use IsPlaying() method to determine if play is still in progress.
         /// Use the StopPlay() method to stop the play.
+        /// Use the PausePlay() method to pause the play.
         ///
 		/// You can also use WaitTillDone() to wait till the play completes. Refer \ref WaitTillDone.
 		///
@@ -107,6 +108,16 @@ namespace CFugue
             player.StopPlay(); // Stop the Play and release MIDI resources
          </pre> */
 		void WaitTillDone();
+
+        /// <Summary>
+        /// Pauses the Play started with PlayAsync().
+        /// </Summary>
+		void PausePlay();
+
+        /// <Summary>
+        /// Resumes the Play paused with PausePlay().
+        /// </Summary>
+		bool ResumePlay();
 
         /// <Summary>
         /// Stops the Play started with PlayAsync().

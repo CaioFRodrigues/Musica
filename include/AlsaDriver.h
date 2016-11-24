@@ -70,6 +70,9 @@ namespace CFugue
         /// @return false if the given output port cannot be opened
 		bool OpenMIDIOutPort ( int id );
 
+        /// @return true if there is an open MIDI Output port
+        bool IsMIDIOutPortOpen();
+
 		/// Closed any previously opened MIDI Input port
 		void CloseMIDIInPort();
 

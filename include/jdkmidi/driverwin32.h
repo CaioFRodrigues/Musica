@@ -71,6 +71,7 @@ namespace jdkmidi
       bool StartTimer ( int resolution_ms );
       bool OpenMIDIInPort ( int id );
       bool OpenMIDIOutPort ( int id );
+      bool IsMIDIOutPortOpen();
       
       void StopTimer();
       void CloseMIDIInPort();

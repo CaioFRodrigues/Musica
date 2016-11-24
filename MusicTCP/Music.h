@@ -15,6 +15,7 @@ public:
 
 private:
 	int bpm;
+	int volume;
 	std::string instrument;
 	int currentOctave;
 };

@@ -95,6 +95,18 @@ namespace CFugue
 		/// </Summary>
 		bool BeginPlayAsync(int nMIDIOutPortID = MIDI_MAPPER, unsigned int nTimerResolutionMS = 20);
 
+		/// <Summary>
+		/// Resumes Rendering the MIDI output to MIDI port.
+		/// @param nTimerResolutionMS is the required minimum resolution for the MIDI timer (in MilliSeconds).
+		/// @return false if MIDI port is not open or if unable to create timer with specified resolution.
+		/// </Summary>
+		bool ResumePlayAsync(unsigned int nTimerResolutionMS = 20);
+
+		/// <Summary>
+		/// Stops Rendering the MIDI output to MIDI port.
+		/// Leave the MIDI output port open to resume play.
+		/// </Summary>
+		void PausePlayAsync();
 
 		/// <Summary>
 		/// Stops Rendering the MIDI output to MIDI port.
