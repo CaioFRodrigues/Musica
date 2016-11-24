@@ -141,7 +141,6 @@ void Music::saveMusic(std::string character, const CString pathName)
 
 	//char * cString = new char[character.length() + 1];
 	//std::strcpy(cString, character.c_str());
-
 	player.SaveAsMidiFile(CFugue::MString(character.c_str()), ascii.m_psz);
 }
 

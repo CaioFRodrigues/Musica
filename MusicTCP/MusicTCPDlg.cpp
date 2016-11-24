@@ -253,7 +253,21 @@ void CMusicTCPDlg::OnBnClickedBtsavemusic()
 	{
 		//TODO trocar a música
 		CString pathName = fileDlg.GetPathName();
-		music.saveMusic(multiLineTextInBox, pathName);
+
+		UpdateData();
+		CString textInBoxCeeString;
+		textBoxControl.GetWindowTextW(textInBoxCeeString);
+
+		CT2CA pszConvertedAnsiString(textInBox.GetString());
+		std::string textInBoxString(pszConvertedAnsiString);
+		if (multiLineTextInBox.compare(textInBoxString)) {
+			multiLineTextInBox = textInBoxString;
+		}
+
+		UpdateData(FALSE);
+
+		if (!multiLineTextInBox.empty())
+			music.saveMusic(music.convertCharacter(multiLineTextInBox), pathName);
 	}
 		
 
