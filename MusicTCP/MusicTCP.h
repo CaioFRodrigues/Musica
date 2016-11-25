@@ -1,6 +1,16 @@
+/*
+UFRGS – Instituto de Informática
+INF01120 Técnicas de Construção de Programas
 
-// MusicTCP.h : main header file for the PROJECT_NAME application
-//
+3ª Fase Trabalho Prático
+Ana Paula Mello
+Caio Fonseca
+Guilherme Cattani de Castro
+
+2016/2 - Turma B
+
+Professor: Marcelo Soares Pimenta
+*/
 
 #pragma once
 
@@ -9,7 +19,6 @@
 #endif
 
 #include "resource.h"		// main symbols
-
 
 // CMusicTCPApp:
 // See MusicTCP.cpp for the implementation of this class

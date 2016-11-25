@@ -1,6 +1,16 @@
+/*
+UFRGS – Instituto de Informática
+INF01120 Técnicas de Construção de Programas
 
-// MusicTCP.cpp : Defines the class behaviors for the application.
-//
+3ª Fase Trabalho Prático
+Ana Paula Mello
+Caio Fonseca
+Guilherme Cattani de Castro
+
+2016/2 - Turma B
+
+Professor: Marcelo Soares Pimenta
+*/
 
 #include "stdafx.h"
 #include "MusicTCP.h"
@@ -26,18 +36,12 @@ CMusicTCPApp::CMusicTCPApp()
 {
 	// support Restart Manager
 	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_RESTART;
-
-	// TODO: add construction code here,
-	// Place all significant initialization in InitInstance
 }
 
 
 // The one and only CMusicTCPApp object
 
 CMusicTCPApp theApp;
-
-
-
 
 // CMusicTCPApp initialization
 
@@ -54,8 +58,6 @@ BOOL CMusicTCPApp::InitInstance()
 	InitCommonControlsEx(&InitCtrls);
 
 	CWinApp::InitInstance();
-	AfxInitRichEdit2();
-
 	AfxEnableControlContainer();
 
 	// Create the shell manager, in case the dialog contains
@@ -70,8 +72,6 @@ BOOL CMusicTCPApp::InitInstance()
 	// of your final executable, you should remove from the following
 	// the specific initialization routines you do not need
 	// Change the registry key under which our settings are stored
-	// TODO: You should modify this string to be something appropriate
-	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
 	CMusicTCPDlg dlg;
