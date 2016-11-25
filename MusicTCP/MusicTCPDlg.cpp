@@ -23,13 +23,14 @@ Professor: Marcelo Soares Pimenta
 #include<string>
 #include "CFugueLib.h"
 #include "Music.h"
+#include "Text.h"
 #include "atlstr.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
-
+#pragma region Dialog Initialization
 // CAboutDlg dialog used for App About
 
 class CAboutDlg : public CDialogEx
@@ -124,8 +125,6 @@ BOOL CMusicTCPDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
-	// TODO: Add extra initialization here
-
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -177,7 +176,9 @@ HCURSOR CMusicTCPDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
+#pragma endregion
 
+#pragma region Button handling
 
 void CMusicTCPDlg::OnBnClickedBtloadtxt()
 {
@@ -208,17 +209,13 @@ void CMusicTCPDlg::OnBnClickedBtloadtxt()
 		textInBox = multiLineTextInBox.c_str();
 		UpdateData(FALSE);
 
-		//Change the window's title to the opened file's title.
-		CString fileName = fileDlg.GetFileTitle();
-
-		//SetWindowText(fileName);
 	}
 }
-
 
 void CMusicTCPDlg::OnBnClickedBtplaymusic()
 {
 	Music music;
+	Text text;
 
 	if (CFugue::GetMidiOutPortCount() <= 0)
 	{
@@ -226,10 +223,8 @@ void CMusicTCPDlg::OnBnClickedBtplaymusic()
 		exit(-1);
 	}
 
-	//std::cout << "Playing Notes..";
-	//Plays the characters read from text as musical notes
-	//music.playMusic(_T("A[5] A[6] A[5]i A[6]i"));	//_T converts char to TCHAR, type used in the CFugue library
 	UpdateData();
+
 	CString textInBoxCeeString;
 	textBoxControl.GetWindowTextW(textInBoxCeeString);
 	
@@ -242,14 +237,13 @@ void CMusicTCPDlg::OnBnClickedBtplaymusic()
 	UpdateData(FALSE);
 
 	if(!multiLineTextInBox.empty())
-		music.playMusic(music.convertCharacter(multiLineTextInBox));
+		music.playMusic(text.convertCharacter(multiLineTextInBox));
 }
-
 
 void CMusicTCPDlg::OnBnClickedBtsavemusic()
 {
 	Music music;
-	
+	Text text;
 
 	TCHAR szFilters[] = _T("Midi files (*.midi)|*.midi|All Files (*.*)|*.*||");
 
@@ -261,7 +255,6 @@ void CMusicTCPDlg::OnBnClickedBtsavemusic()
 	// returns IDOK.
 	if (fileDlg.DoModal() == IDOK)
 	{
-		//TODO trocar a música
 		CString pathName = fileDlg.GetPathName();
 
 		UpdateData();
@@ -277,16 +270,14 @@ void CMusicTCPDlg::OnBnClickedBtsavemusic()
 		UpdateData(FALSE);
 
 		if (!multiLineTextInBox.empty())
-			music.saveMusic(music.convertCharacter(multiLineTextInBox), pathName);
+			music.saveMusic(text.convertCharacter(multiLineTextInBox), pathName);
 	}
 		
 
 }
 
-
 void CMusicTCPDlg::OnBnClickedBtsavetext()
 {
-	// TODO: Add your control notification handler code here
 	// szFilters is a text string that includes two file name filters:
 	// "*.my" for "MyType Files" and "*.*' for "All Files."
 	TCHAR szFilters[] = _T("Text files (*.txt)|*.txt|All Files (*.*)|*.*||");
@@ -317,11 +308,10 @@ void CMusicTCPDlg::OnBnClickedBtsavetext()
 	}
 }
 
-
 void CMusicTCPDlg::OnBnClickedBtcleantext()
 {
-	// TODO: Add your control notification handler code here
 	UpdateData();
 	textInBox = "";
 	UpdateData(FALSE);
 }
+#pragma endregion

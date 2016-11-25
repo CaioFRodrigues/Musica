@@ -18,6 +18,7 @@ Professor: Marcelo Soares Pimenta
 #include <iostream>
 #include "CFugueLib.h"
 
+#pragma region Initialization
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -107,4 +108,4 @@ BOOL CMusicTCPApp::InitInstance()
 	//  application, rather than start the application's message pump.
 	return FALSE;
 }
-
+#pragma endregion

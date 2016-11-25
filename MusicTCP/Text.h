@@ -22,10 +22,7 @@ public:
 	Text();
 	~Text();
 
-	Music music;
-
-	void playText(std::string text);
-	std::string readFile();
+	std::string convertCharacter(std::string text);
 
 private:
 	std::string text;

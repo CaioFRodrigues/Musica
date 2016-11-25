@@ -218,11 +218,7 @@
     <None Include="res\MusicTCP.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\##Documents\Images\ufrgs.png" />
     <Image Include="res\MusicTCP.ico" />
-    <Image Include="ufrgs.ico" />
-    <Image Include="ufrgs.png" />
-    <Image Include="ufrgsicone.ico" />
     <Image Include="ufrgsIconeDef.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
