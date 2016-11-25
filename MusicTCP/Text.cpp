@@ -21,12 +21,7 @@ Text::Text()
 {
 }
 
-
 Text::~Text()
-{
-}
-
-void Text::playText(std::string text)
 {
 }
 
